@@ -1,0 +1,21 @@
+.btn {
+  width: 100%;
+  height: 40px;
+  background: #7b6cf9;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  outline: none;
+
+  &:hover {
+    background: lighten(#6d63ff, 6%);
+
+    &:active {
+      background: darken(#6d63ff, 6%);
+    }
+  }
+}

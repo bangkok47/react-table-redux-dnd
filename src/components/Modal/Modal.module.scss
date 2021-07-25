@@ -1,0 +1,90 @@
+.modal {
+  position: fixed;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: all;
+
+  ul {
+    padding-inline-start: 5px;
+  }
+
+  span {
+    cursor: pointer;
+  }
+
+  span:hover {
+    color: red;
+  }
+
+  .content {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #fff;
+    width: 40vw;
+
+    input {
+      border: 1px solid #a9a9a9;
+      border-radius: 10px;
+      background-color: #fff;
+      min-height: 25px;
+    }
+
+    li {
+      list-style-type: none;
+      border-bottom: 1px solid #a9a9a9;
+    }
+
+    .main {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      display: flex;
+      justify-content: space-around;
+
+      .allColumns {
+        width: 200px;
+        background-color: #e9e9e9;
+        border-radius: 10px;
+        padding: 5px;
+      }
+
+      .line {
+        border-right: 2px solid #a9a9a9;
+      }
+
+      .selectedColumns {
+        width: 200px;
+        background-color: #e9e9e9;
+        border-radius: 10px;
+        padding: 5px;
+
+        .liElement {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .deleteBtn {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.modal_closed {
+  display: none;
+  pointer-events: none;
+}
