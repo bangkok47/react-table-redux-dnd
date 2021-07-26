@@ -1,17 +1,25 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Button from '../Button/Button';
-
 import { addedColumns, removeSelectedColumn, setNewColumns } from '../../redux/actions/actions';
 
-import style from './Modal.module.scss';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-function Modal({ show, hidden, allColumnsHeaders }) {
+import style from './Modal.module.scss';
+import Button from '../Button/Button';
+import FirstColumn from './Columns/FirstColumn/FirstColumn';
+import SecondColumn from './Columns/SecondColumn/SecondColumn';
+import Item from './Item/Item';
+
+function Modal({ show, hidden }) {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
+  const [isFirstColumn, setIsFirstColumn] = React.useState(true);
   const selectedColumns = useSelector(({ columns }) => columns.selectedColumns);
   const allStateColumns = useSelector(({ columns }) => columns.columns);
+
+  const selectedItem = <Item setIsFirstColumn={setIsFirstColumn} />;
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -49,34 +57,22 @@ function Modal({ show, hidden, allColumnsHeaders }) {
         <input value={value} onChange={handleInputChange} type="text" placeholder="Search..." />
 
         <div className={style.main}>
-          <div className={style.allColumns}>
-            <ul>
-              {allStateColumns
-                .filter((el) => el.Header.toLowerCase().includes(value.toLowerCase()))
-                .map((column, idx) => (
-                  <li key={idx}>
-                    <span id={column.Header} onClick={addColumn}>
-                      {column.Header}
-                    </span>
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className={style.line}></div>
-          <div className={style.selectedColumns}>
-            <ul>
-              {selectedColumns
-                ? selectedColumns.map((col, idx) => (
-                    <li className={style.liElement} key={idx}>
-                      <span>{col}</span>
-                      <span id={col} className={style.deleteBtn} onClick={removeColumn}>
-                        DEL
-                      </span>
-                    </li>
-                  ))
-                : null}
-            </ul>
-          </div>
+          <DndProvider backend={HTML5Backend}>
+            <FirstColumn
+              title="column 1"
+              allStateColumns={allStateColumns}
+              addColumn={addColumn}
+              value={value}>
+              {isFirstColumn && selectedItem}
+            </FirstColumn>
+            <div className={style.line}></div>
+            <SecondColumn
+              title="column 2"
+              selectedColumns={selectedColumns}
+              removeColumn={removeColumn}>
+              {!isFirstColumn && selectedItem}
+            </SecondColumn>
+          </DndProvider>
         </div>
         <hr />
         <div className={style.footer}>

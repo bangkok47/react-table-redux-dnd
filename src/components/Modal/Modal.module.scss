@@ -49,31 +49,8 @@
       display: flex;
       justify-content: space-around;
 
-      .allColumns {
-        width: 200px;
-        background-color: #e9e9e9;
-        border-radius: 10px;
-        padding: 5px;
-      }
-
       .line {
         border-right: 2px solid #a9a9a9;
-      }
-
-      .selectedColumns {
-        width: 200px;
-        background-color: #e9e9e9;
-        border-radius: 10px;
-        padding: 5px;
-
-        .liElement {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .deleteBtn {
-          cursor: pointer;
-        }
       }
     }
 

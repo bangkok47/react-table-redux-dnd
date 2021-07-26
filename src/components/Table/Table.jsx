@@ -70,7 +70,7 @@ function Table({ modalActive, setModalActive }) {
 
   return (
     <>
-      <Modal show={modalActive} hidden={setModalActive} allColumnsHeaders={allColumns} />
+      <Modal show={modalActive} hidden={setModalActive} />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
