@@ -22,6 +22,7 @@ function Modal({ show, hidden, allColumnsHeaders }) {
     if (selectedColumns.includes(id)) {
       return;
     }
+    console.log(selectedColumns);
 
     dispatch(addedColumns(id));
   };
@@ -65,16 +66,14 @@ function Modal({ show, hidden, allColumnsHeaders }) {
           <div className={style.selectedColumns}>
             <ul>
               {selectedColumns
-                ? selectedColumns
-                    .filter((el, idx) => selectedColumns.indexOf(el) === idx)
-                    .map((col, idx) => (
-                      <li className={style.liElement} key={idx}>
-                        <span>{col}</span>
-                        <span id={col} className={style.deleteBtn} onClick={removeColumn}>
-                          DEL
-                        </span>
-                      </li>
-                    ))
+                ? selectedColumns.map((col, idx) => (
+                    <li className={style.liElement} key={idx}>
+                      <span>{col}</span>
+                      <span id={col} className={style.deleteBtn} onClick={removeColumn}>
+                        DEL
+                      </span>
+                    </li>
+                  ))
                 : null}
             </ul>
           </div>

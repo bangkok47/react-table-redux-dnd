@@ -15,7 +15,7 @@ function Table({ modalActive, setModalActive }) {
   const COLUMNS = useSelector(({ columns }) => columns.columns);
   const applyModalColumns = useSelector(({ columns }) => columns.applyModalColumns);
 
-  const fetchData = async () => {
+  const fetchData = React.useCallback(async () => {
     try {
       const response = await axios.get(
         'http://www.filltext.com/?rows=100&firstname={firstName}&lastname={lastName}&phone={phone|format}&address={streetAddress}&city={city}&state={usState|abbr}&zip={zip}&pretty=true&email={email}&ip={ip}&pwd={password}&id={index}',
@@ -25,11 +25,11 @@ function Table({ modalActive, setModalActive }) {
       alert('Ошибка при запросе данных');
       console.error(error);
     }
-  };
+  }, [dispatch]);
 
   React.useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const columns = React.useMemo(
     () => (applyModalColumns.length > 0 ? applyModalColumns : COLUMNS),
@@ -67,7 +67,6 @@ function Table({ modalActive, setModalActive }) {
       columns.filter((column) => !column.isVisible).map((column) => column.accessor),
     );
   }, [setHiddenColumns, columns, applyModalColumns]);
-  console.log(columns);
 
   return (
     <>
