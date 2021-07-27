@@ -23,13 +23,13 @@ const initialState = {
     {
       Header: 'State',
       accessor: 'state',
-      isVisible: false,
+      isVisible: true,
       name: 'State',
     },
     {
       Header: 'City',
       accessor: 'city',
-      isVisible: false,
+      isVisible: true,
       name: 'City',
     },
     {

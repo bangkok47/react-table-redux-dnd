@@ -1,10 +1,21 @@
 import { ActionTypes } from '../constants/action-types';
+import axios from 'axios';
 
-export const setUsers = (users) => {
-  return {
-    type: ActionTypes.SET_USERS,
-    payload: users,
-  };
+export const setUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      'http://www.filltext.com/?rows=100&firstname={firstName}&lastname={lastName}&phone={phone|format}&address={streetAddress}&city={city}&state={usState|abbr}&zip={zip}&pretty=true&email={email}&ip={ip}&pwd={password}&id={index}',
+    );
+    dispatch({
+      type: ActionTypes.SET_USERS,
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.USERS_ERROR,
+      payload: console.log(error),
+    });
+  }
 };
 
 export const addedColumns = (id) => {

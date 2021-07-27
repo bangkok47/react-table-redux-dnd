@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsers } from '../../redux/actions/actions';
@@ -15,21 +14,9 @@ function Table({ modalActive, setModalActive }) {
   const COLUMNS = useSelector(({ columns }) => columns.columns);
   const applyModalColumns = useSelector(({ columns }) => columns.applyModalColumns);
 
-  const fetchData = React.useCallback(async () => {
-    try {
-      const response = await axios.get(
-        'http://www.filltext.com/?rows=100&firstname={firstName}&lastname={lastName}&phone={phone|format}&address={streetAddress}&city={city}&state={usState|abbr}&zip={zip}&pretty=true&email={email}&ip={ip}&pwd={password}&id={index}',
-      );
-      dispatch(setUsers(response.data));
-    } catch (error) {
-      alert('Ошибка при запросе данных');
-      console.error(error);
-    }
-  }, [dispatch]);
-
   React.useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    dispatch(setUsers());
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => (applyModalColumns.length > 0 ? applyModalColumns : COLUMNS),
