@@ -25,7 +25,7 @@ function Modal({ show, hidden }) {
     if (selectedColumns.includes(id)) {
       return;
     }
-
+    setValue('');
     dispatch(addedColumns(id));
   };
 

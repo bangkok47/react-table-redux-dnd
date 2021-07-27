@@ -108,10 +108,10 @@ function Table({ modalActive, setModalActive }) {
           ))}
         </select>
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previos
+          &#60;&#60;&#60;
         </button>
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
+          &#62;&#62;&#62;
         </button>
       </div>
     </>

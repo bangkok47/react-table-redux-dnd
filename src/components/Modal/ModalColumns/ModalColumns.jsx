@@ -17,6 +17,8 @@ function ModalColumns({ allStateColumns, addColumn, selectedColumns, removeColum
     }),
   });
 
+  const opacity = isOver ? 0.5 : 1;
+
   return (
     <div className={style.main}>
       <div className={style.allColumns}>
@@ -24,7 +26,7 @@ function ModalColumns({ allStateColumns, addColumn, selectedColumns, removeColum
           {allStateColumns
             .filter((el) => el.Header.toLowerCase().includes(value.toLowerCase()))
             .map((column, idx) => (
-              <Item key={idx} id={column.id}>
+              <Item key={idx} id={column.name}>
                 <li>
                   <span id={column.Header} onClick={addColumn}>
                     {column.Header}
@@ -42,7 +44,11 @@ function ModalColumns({ allStateColumns, addColumn, selectedColumns, removeColum
                 <Item key={idx}>
                   <li className={style.liElement}>
                     <span>{column}</span>
-                    <span id={column} className={style.deleteBtn} onClick={removeColumn}>
+                    <span
+                      id={column}
+                      className={style.deleteBtn}
+                      onClick={removeColumn}
+                      style={{ opacity }}>
                       &#10060;
                     </span>
                   </li>
