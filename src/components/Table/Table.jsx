@@ -50,7 +50,6 @@ function Table({ modalActive, setModalActive }) {
     setPageSize,
     state,
     prepareRow,
-    allColumns,
     setHiddenColumns,
   } = useTable(
     {

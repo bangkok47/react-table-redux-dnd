@@ -26,3 +26,10 @@ export const setNewColumns = () => {
     type: ActionTypes.SET_NEW_COLUMNS,
   };
 };
+
+export const setDraggedColumn = (column) => {
+  return {
+    type: ActionTypes.DRAG_COLUMN,
+    payload: column,
+  };
+};

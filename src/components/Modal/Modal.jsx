@@ -8,18 +8,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import style from './Modal.module.scss';
 import Button from '../Button/Button';
-import FirstColumn from './Columns/FirstColumn/FirstColumn';
-import SecondColumn from './Columns/SecondColumn/SecondColumn';
-import Item from './Item/Item';
+import ModalColumns from './ModalColumns/ModalColumns';
 
 function Modal({ show, hidden }) {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
-  const [isFirstColumn, setIsFirstColumn] = React.useState(true);
   const selectedColumns = useSelector(({ columns }) => columns.selectedColumns);
   const allStateColumns = useSelector(({ columns }) => columns.columns);
-
-  const selectedItem = <Item setIsFirstColumn={setIsFirstColumn} />;
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -30,7 +25,6 @@ function Modal({ show, hidden }) {
     if (selectedColumns.includes(id)) {
       return;
     }
-    console.log(selectedColumns);
 
     dispatch(addedColumns(id));
   };
@@ -58,20 +52,13 @@ function Modal({ show, hidden }) {
 
         <div className={style.main}>
           <DndProvider backend={HTML5Backend}>
-            <FirstColumn
-              title="column 1"
+            <ModalColumns
               allStateColumns={allStateColumns}
               addColumn={addColumn}
-              value={value}>
-              {isFirstColumn && selectedItem}
-            </FirstColumn>
-            <div className={style.line}></div>
-            <SecondColumn
-              title="column 2"
+              value={value}
               selectedColumns={selectedColumns}
-              removeColumn={removeColumn}>
-              {!isFirstColumn && selectedItem}
-            </SecondColumn>
+              removeColumn={removeColumn}
+            />
           </DndProvider>
         </div>
         <hr />

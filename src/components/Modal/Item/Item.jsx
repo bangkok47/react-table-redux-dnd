@@ -1,23 +1,18 @@
 import React from 'react';
+import { ItemTypes } from '../../../redux/constants/modal-items';
+
 import { useDrag } from 'react-dnd';
 
-function Item({ children, setIsFirstColumn }) {
+function Item({ children, id }) {
   const [{ isDragging }, drag] = useDrag({
-    type: 'ITEM',
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult();
-      if (dropResult && dropResult.name === 'column 1') {
-        setIsFirstColumn(true);
-      } else {
-        setIsFirstColumn(false);
-      }
-    },
+    type: ItemTypes.ITEM,
+    item: () => ({ id }),
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
+      isDragging: !!monitor.isDragging(),
     }),
   });
 
-  const opacity = isDragging ? 0.4 : 1;
+  const opacity = isDragging ? 0.5 : 1;
 
   return (
     <div ref={drag} style={{ opacity }}>
